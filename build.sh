@@ -1,5 +1,6 @@
 #!/bin/bash
 # Build pact_broker image from docker file
+set -e
 docker build -t=pact_broker .
 
 # Stop and remove any running broker_app container instances before updating

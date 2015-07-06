@@ -1,23 +1,23 @@
-# Dockerise the pact-broker
+FROM phusion/passenger-ruby22:latest
 
-FROM phusion/baseimage
+ENV HOME /root
+CMD ["/sbin/my_init"]
+RUN rm -f /etc/service/nginx/down
 
-RUN apt-get update && apt-get install -y \
-  build-essential \
-  libpq-dev \
-  ruby-full
+RUN rm /etc/nginx/sites-enabled/default
+ADD webapp.conf /etc/nginx/sites-enabled/webapp.conf
+ADD pactbroker-env.conf /etc/nginx/main.d/pactbroker-env.conf
 
 RUN gem install bundler
 
-EXPOSE 80
-ENV HOME /root
-CMD ["/etc/service/app/run"]
+RUN mkdir -p /home/app/pact_broker
+RUN mkdir /home/app/pact_broker/public
+RUN mkdir /home/app/pact_broker/tmp
 
-ADD . /app
-
-WORKDIR /app
+WORKDIR /home/app/pact_broker
+ADD config.ru config.ru
 ADD Gemfile Gemfile
 RUN bundle install
+RUN chown -R app:app /home/app/pact_broker
 
-RUN mkdir /etc/service/app
-ADD boot_app.sh /etc/service/app/run
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
