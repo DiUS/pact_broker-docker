@@ -16,5 +16,3 @@ ADD pact_broker/ $APP_HOME/
 RUN chown -R app:app $APP_HOME
 
 CMD ["$APP_HOME/customize_webapp_conf_and_start.sh"]
-
-EXPOSE 80 2020 3030 4040 5050 6060 7070
