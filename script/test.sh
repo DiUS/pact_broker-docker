@@ -39,17 +39,18 @@ docker run --name broker_app \
   -e PACT_BROKER_DATABASE_PASSWORD=$PACT_BROKER_DATABASE_PASSWORD \
   -e PACT_BROKER_DATABASE_HOST=$PACT_BROKER_DATABASE_HOST \
   -e PACT_BROKER_DATABASE_NAME=$PACT_BROKER_DATABASE_NAME \
-  -d -p 80:80 dius/pact_broker
+  -e PACT_BROKER_PORT=$PACT_BROKER_PORT
+  -d -p $PACT_BROKER_PORT:$PACT_BROKER_PORT dius/pact_broker
 
 sleep 5
 
 container_id=$(docker ps -f name=broker_app | tail -1 | awk '{print $1}')
 echo 'Checking that server can be connected to from within Docker container'
-docker exec ${container_id} curl -v http://localhost:80
+docker exec ${container_id} curl -v http://localhost:$PACT_BROKER_PORT
 echo 'Checking that server can be connected to from outside Docker container'
-curl http://${test_ip}:80
+curl http://${test_ip}:$PACT_BROKER_PORT
 echo ''
-response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${test_ip}:80)
+response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${test_ip}:$PACT_BROKER_PORT)
 
 [[ "${response_code}" != '200' ]] && echo 'Error retrieving index from oustide Docker container' && exit 1
 [[ "${response_code}" == '200' ]] && echo 'Successfully retrieved index from outside Docker container'
