@@ -39,7 +39,7 @@ env:
     - PACT_WAIT_TIMEOUT="30s"
   matrix:
     - PACT_BROKER_PORT=80
-#    - PACT_BROKER_PORT=9999
+    - PACT_BROKER_PORT=9999
 
 # The test script is designed to run in a Linux machine and therefore
 # in TravisCI. It also has conditionals for OSX so developers can run it there

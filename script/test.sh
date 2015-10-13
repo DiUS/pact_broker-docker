@@ -48,6 +48,12 @@ report_postgres_failed () {
   die "Postgres failed to start"
 }
 
+# show docker logs if any then die
+report_pact_failed () {
+  docker logs ${PACT_CONT_NAME} || true
+  die "Pact Broker failed"
+}
+
 if [ "${TRAVIS}" == "true" ]; then
   DISPOSABLE_PSQL=true
 fi
@@ -72,7 +78,6 @@ fi
 
 if [ "$(uname)" == "Darwin" ]; then
   PORT_BIND="${PACT_BROKER_PORT}:${PACT_BROKER_PORT}"
-  EXTERN_BROKER_PORT=${PACT_BROKER_PORT}
   if [ "true" == "$(command -v boot2docker > /dev/null 2>&1 && echo 'true' || echo 'false')" ]; then
     test_ip=$(boot2docker ip)
   else
@@ -146,14 +151,9 @@ docker run --privileged --name=${PACT_CONT_NAME} -d -p ${PORT_BIND} \
   -e PACT_BROKER_DATABASE_PASSWORD=${PACT_BROKER_DATABASE_PASSWORD} \
   -e PACT_BROKER_DATABASE_HOST=${PACT_BROKER_DATABASE_HOST} \
   -e PACT_BROKER_DATABASE_NAME=${PACT_BROKER_DATABASE_NAME} \
+  -e PACT_BROKER_PORT=${PACT_BROKER_PORT} \
   dius/pact_broker
 sleep 1 && docker logs ${PACT_CONT_NAME}
-
-# If the port was dynamically allocated by docker then find it out
-if [ -z "${EXTERN_BROKER_PORT}" ]; then
-  QUERY="{{(index (index .NetworkSettings.Ports "${PACT_BROKER_PORT}/tcp") 0).HostPort}}"
-  EXTERN_BROKER_PORT=`docker inspect -f='${QUERY}' ${PACT_CONT_NAME}`
-fi
 
 echo ""
 echo "Checking that the Pact Broker container is still up and running"
@@ -162,8 +162,7 @@ docker inspect -f "{{ .State.Running }}" ${PACT_CONT_NAME} | grep true || die \
 
 echo ""
 echo "Checking that server can be connected from within the Docker container"
-docker exec ${PACT_CONT_NAME} wait_ready ${PACT_WAIT_TIMEOUT} || die \
-  "When running wait_ready inside the container!"
+docker exec ${PACT_CONT_NAME} wait_ready ${PACT_WAIT_TIMEOUT} || report_pact_failed
 
 if [ -z "${test_ip}" ]; then
   test_ip=`docker inspect -f='{{ .NetworkSettings.IPAddress }}' ${PACT_CONT_NAME}`
@@ -174,17 +173,21 @@ echo "Checking that server can be connected from outside the Docker container"
 export PACT_BROKER_HOST=${test_ip}
 $(dirname "$0")/../container/usr/bin/wait_ready ${PACT_WAIT_TIMEOUT}
 
+url="http://${test_ip}:${PACT_BROKER_PORT}/ui/relationships"
+
 echo ""
 echo "Checking that server accepts and return HTML from outside"
-curl -H "Accept:text/html" -s "http://${test_ip}:${EXTERN_BROKER_PORT}/ui/relationships"
+echo " at url: ${url}"
+curl -H "Accept:text/html" -s "${url}" || curl -H "Accept:text/html" "${url}" || report_pact_failed
 
 echo ""
 echo "Checking for specific HTML content from outside: '0 pacts'"
-curl -H "Accept:text/html" -s "http://${test_ip}:${EXTERN_BROKER_PORT}/ui/relationships" | grep "0 pacts"
+echo " at url: ${url}"
+curl -H "Accept:text/html" -s "${url}" | grep "0 pacts" || report_pact_failed
 
 echo ""
 echo "Checking that server accepts and responds with status 200"
-response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${test_ip}:${EXTERN_BROKER_PORT})
+response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${test_ip}:${PACT_BROKER_PORT})
 
 if [[ "${response_code}" == '200' ]]; then
   echo ""
