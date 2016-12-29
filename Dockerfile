@@ -4,9 +4,9 @@
 #           |==> HERE
 FROM phusion/passenger-ruby22:0.9.17
 
-EXPOSE 80
+ENV PACT_BROKER_PORT=80
 ENV APP_HOME=/home/app/pact_broker
-CMD ["/sbin/my_init"]
+CMD ["customize_webapp_conf_and_start.sh"]
 RUN rm -f /etc/service/nginx/down
 RUN rm /etc/nginx/sites-enabled/default
 ADD container /
