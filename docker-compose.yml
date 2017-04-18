@@ -13,7 +13,7 @@ services:
     image: dius/pact_broker
     ports:
       - "80:80"
-    depends_on:
+    links:
       - postgres
     environment:
       PACT_BROKER_USERNAME: postgres
