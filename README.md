@@ -30,7 +30,7 @@ This repository deploys [Pact Broker](https://github.com/bethesque/pact_broker) 
 ## Alternative setup using docker-compose
 
 1. Use the docker-compose.yml file from the repository, modify and use as needed. 
-2. Use `docker-compose up` to get pack broker running.
+2. Use `docker-compose up` to get Pact Broker running.
 
 ## Publishing to Docker Hub
 
