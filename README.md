@@ -44,19 +44,17 @@ curl -v http://$DOCKER_HOST # you can visit in your browser too!
 
 _NOTE: this image should be modified before using in Production, in particular, the use of hard-coded credentials_
 
-## Publishing to Docker Hub
+## Bulding + Publishing
 
-1. Login to docker hub from console
+1. Update pact_broker dependency in `Gemfile` to latest version
+1. Update dependencies to latest
 
-```
-docker login
-```
+        cd pact_broker
+        bundle update
+        cd ..
 
-This will prompt for your docker hub credentials and email
+1. Commit changes `git commit -am "Some useful message"`
+1. Tag changes i.e. `git tag -a 0.0.10 -m "Update to pact_broker gem a.b.c"`
+1. `git push --follow-tags`
 
-2. Build the docker image for the dius account
-
-```
-docker login
-./script/build_and_push.sh # Note: have not tested this yet
-```
+Sit back, [Docker Hub](https://hub.docker.com/r/dius/pact-broker/) will take care of the rest.
