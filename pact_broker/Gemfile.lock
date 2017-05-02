@@ -90,7 +90,7 @@ GEM
       rspec (>= 2.14)
       term-ansicolor (~> 1.0)
       thor
-    pact_broker (2.0.0.beta.3)
+    pact_broker (2.0.0.beta.4)
       dry-validation (~> 0.10.5)
       haml (~> 4.0)
       httparty (~> 0.14)
@@ -150,7 +150,7 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     semver2 (3.4.2)
-    sequel (4.45.0)
+    sequel (4.46.0)
     sinatra (1.4.8)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -176,7 +176,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  pact_broker (= 2.0.0.beta.3)
+  pact_broker (= 2.0.0.beta.4)
   passenger
   pg
 
