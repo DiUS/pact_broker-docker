@@ -16,6 +16,7 @@ ADD pact_broker/Gemfile $APP_HOME/
 ADD pact_broker/Gemfile.lock $APP_HOME/
 RUN chown -R app:app $APP_HOME
 
-RUN su app -c "cd $APP_HOME && bundle install --deployment --without='development test'"
+#RUN su app -c "cd $APP_HOME && bundle install --deployment --without='development test'"
+RUN su app -c "cd $APP_HOME && bundle install"
 ADD pact_broker/ $APP_HOME/
 RUN chown -R app:app $APP_HOME
