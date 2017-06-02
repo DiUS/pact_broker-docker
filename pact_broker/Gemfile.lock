@@ -183,7 +183,7 @@ DEPENDENCIES
   pact_broker (~> 2.0)
   passenger
   pg
-  mysql2
+  mysql2 (0.3.15)
 
 BUNDLED WITH
    1.14.6
