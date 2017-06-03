@@ -119,7 +119,6 @@ GEM
     passenger (5.1.2)
       rack
       rake (>= 0.8.1)
-    pg (0.20.0)
     mysql2 (0.3.16)
     rack (1.5.5)
     rack-protection (1.5.3)
@@ -182,7 +181,6 @@ PLATFORMS
 DEPENDENCIES
   pact_broker (~> 2.0)
   passenger
-  pg
   mysql2 (0.3.16)
 
 BUNDLED WITH
