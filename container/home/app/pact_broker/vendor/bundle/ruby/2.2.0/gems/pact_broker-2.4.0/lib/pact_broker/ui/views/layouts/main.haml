@@ -1,0 +1,7 @@
+%html
+  %head
+    %title= defined?(title) ? title : ""
+    %link{rel: 'shortcut icon', href: '/images/favicon.ico', type:'image/x-icon'}
+  %body
+    %div{style: 'color: red; width: 100%; text-align: center'} The dius/pact_broker docker image is deprecated. Please use the new <strong>dius/pact-broker</strong> image.
+    = yield
