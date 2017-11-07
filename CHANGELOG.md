@@ -44,6 +44,17 @@
 * **gems**
   * update pact_broker gem to version 2.7.0.beta.2	 ([305f899](/../../commit/305f899))
 
+<a name="2.6.0-3"></a>
+### 2.6.0-3 (2017-11-03)
+
+
+#### Features
+
+* allow configuration to be loaded from database	 ([d373f48](/../../commit/d373f48))
+
+* **gems**
+  * update pact_broker gem to version 2.6.0	 ([ac020c5](/../../commit/ac020c5))
+
 <a name="2.6.0-2"></a>
 ### 2.6.0-2 (2017-10-13)
 
