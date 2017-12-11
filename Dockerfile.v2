@@ -1,0 +1,110 @@
+FROM ruby:2.4-alpine
+
+ENV NGINX_VERSION 1.13.7
+ENV APP_HOME /home/app/pact_broker/
+
+RUN apk add --update --no-cache libxml2 \
+    ca-certificates \
+    pcre \
+    postgresql-dev \
+    postgresql-libs \
+    mariadb \
+    mariadb-dev \
+    sqlite-dev \
+    sqlite-libs \
+    libcurl
+
+RUN adduser -D app
+RUN echo 'gem: --no-document' > /etc/gemrc
+COPY --chown=app:app pact_broker/config.ru pact_broker/Gemfile pact_broker/Gemfile.lock $APP_HOME
+
+# Build time only - won't bloat image because the layer is not finalised until after the
+# RUN statement completes, and the --virtual package gets removed after the bundle install
+RUN apk add --update --no-cache --virtual .build-fluff \
+  build-base \
+  libc-dev \
+  gcc \
+  glib-dev \
+  make \
+  zlib-dev \
+  linux-headers \
+  autoconf \
+  coreutils \
+  gdbm-dev \
+  openssl-dev \
+  && \
+  gem install bundler && \
+  cd $APP_HOME && \
+  bundle install && \
+  gem uninstall bundler && \
+  apk del .build-fluff && \
+  echo finished building app dependency layers
+
+RUN apk add --no-cache --virtual .build-deps \
+    build-base \
+    linux-headers \
+    pcre-dev \
+    wget \
+    zlib-dev \
+    curl-dev \
+    file \
+  && cd /tmp \
+  && wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
+  && tar xzf nginx-${NGINX_VERSION}.tar.gz \
+  && cd /tmp/nginx-${NGINX_VERSION} \
+  && ./configure \
+    --prefix=/etc/nginx \
+    --sbin-path=/usr/sbin/nginx \
+    --conf-path=/etc/nginx/nginx.conf \
+    --error-log-path=/var/log/nginx/error.log \
+    --http-log-path=/var/log/nginx/access.log \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/run/nginx.lock \
+    --http-client-body-temp-path=/var/cache/nginx/client_temp \
+    --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+    --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+    --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
+    --user=nginx \
+    --group=nginx \
+    --with-http_ssl_module \
+    --with-http_realip_module \
+    --with-http_addition_module \
+    --with-http_sub_module \
+    --with-http_dav_module \
+    --with-http_flv_module \
+    --with-http_mp4_module \
+    --with-http_gunzip_module \
+    --with-http_gzip_static_module \
+    --with-http_random_index_module \
+    --with-http_secure_link_module \
+    --with-http_stub_status_module \
+    --with-http_auth_request_module \
+    --with-threads \
+    --with-stream \
+    --with-stream_ssl_module \
+    --with-http_slice_module \
+    --with-mail \
+    --with-mail_ssl_module \
+    --with-file-aio \
+    --with-http_v2_module \
+    --with-ipv6 \
+    --with-stream_realip_module \
+    --add-module=$(passenger-config --nginx-addon-dir) \
+  && make -j$(getconf _NPROCESSORS_ONLN) \
+  && make install \
+  && sed -i -e 's/#access_log  logs\/access.log  main;/access_log \/dev\/stdout;/' -e 's/#error_log  logs\/error.log  notice;/error_log stderr notice;/' /etc/nginx/nginx.conf \
+  && adduser -D nginx \
+  && mkdir -p /var/cache/nginx \
+  && apk del .build-deps \
+  && rm -rf /tmp/* && \
+  echo finished building nginx layers
+
+RUN rm -f /etc/nginx/sites-enabled/default
+COPY container /
+COPY --chown=app:app pact_broker/ $APP_HOME/
+
+USER root
+EXPOSE 80
+CMD ["nginx"]
+

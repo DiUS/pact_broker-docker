@@ -14,7 +14,10 @@ services:
       POSTGRES_DB: postgres
 
   broker_app:
-    image: dius/pact-broker
+    build:
+      context: .
+      dockerfile: Dockerfile.v2
+    # image: dius/pact-broker
     ports:
       - "80:80"
     links:
