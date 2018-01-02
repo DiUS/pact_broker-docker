@@ -10,12 +10,13 @@ COPY container /
 RUN gem update --system
 USER app
 
-COPY --chown=app:app pact_broker/config.ru pact_broker/Gemfile pact_broker/Gemfile.lock $APP_HOME 
+COPY pact_broker/config.ru pact_broker/Gemfile pact_broker/Gemfile.lock $APP_HOME 
 # Update system gems for:
 # https://www.ruby-lang.org/en/news/2017/08/29/multiple-vulnerabilities-in-rubygems/
 RUN gem install bundler && \
-    cd $APP_HOME && bundle install --deployment --without='development test'
-COPY --chown=app:app pact_broker/ $APP_HOME/
+  cd $APP_HOME && bundle install --deployment --without='development test'
+COPY pact_broker/ $APP_HOME/
+RUN chown -R app:app $APP_HOME
 
 USER root
 EXPOSE 80
