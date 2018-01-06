@@ -8,6 +8,7 @@ ENV APP_HOME=/home/app/pact_broker/
 RUN rm -f /etc/service/nginx/down /etc/nginx/sites-enabled/default
 COPY container /
 RUN gem update --system
+RUN mkdir -p $APP_HOME && chown -R app:app $APP_HOME
 USER app
 
 COPY pact_broker/config.ru pact_broker/Gemfile pact_broker/Gemfile.lock $APP_HOME 
@@ -16,7 +17,6 @@ COPY pact_broker/config.ru pact_broker/Gemfile pact_broker/Gemfile.lock $APP_HOM
 RUN gem install bundler && \
   cd $APP_HOME && bundle install --deployment --without='development test'
 COPY pact_broker/ $APP_HOME/
-RUN chown -R app:app $APP_HOME
 
 USER root
 EXPOSE 80
