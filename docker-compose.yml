@@ -1,16 +1,20 @@
-version: '2'
+version: '3'
 
 services:
+
   postgres:
     image: postgres
+    healthcheck:
+      test: psql postgres --command "select 1" -U postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
+
   broker_app:
-    image: dius/pact_broker
+    image: dius/pact-broker
     ports:
       - "80:80"
     links:
@@ -20,3 +24,13 @@ services:
       PACT_BROKER_DATABASE_PASSWORD: password
       PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: postgres
+
+  nginx:
+    image: nginx:alpine
+    links:
+      - broker_app:broker
+    volumes:
+    - ./ssl/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    - ./ssl:/etc/nginx/ssl
+    ports:
+    - "8443:443"
