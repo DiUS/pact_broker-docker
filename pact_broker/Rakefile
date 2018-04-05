@@ -1,0 +1,15 @@
+require 'pact_broker/tasks'
+require 'logger'
+require_relative 'database_connection'
+
+PactBroker::DB::MigrationTask.new do | task |
+  task.database_connection = create_database_connection(Logger.new($stdout))
+end
+
+PactBroker::DB::VersionTask.new do | task |
+  task.database_connection = create_database_connection(Logger.new($stdout))
+end
+
+PactBroker::DB::CleanTask.new do | task |
+  task.database_connection = create_database_connection(Logger.new($stdout))
+end
