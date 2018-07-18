@@ -13,12 +13,10 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
 
-  broker_app:
+  broker:
     image: dius/pact-broker
     ports:
       - "80:80"
-    links:
-      - postgres
     environment:
       PACT_BROKER_DATABASE_USERNAME: postgres
       PACT_BROKER_DATABASE_PASSWORD: password
@@ -27,8 +25,6 @@ services:
 
   nginx:
     image: nginx:alpine
-    links:
-      - broker_app:broker
     volumes:
     - ./ssl/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     - ./ssl:/etc/nginx/ssl
