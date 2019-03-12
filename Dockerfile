@@ -38,5 +38,5 @@ RUN touch /etc/service/cron/down && chmod +x /etc/service/cron/down
 
 CMD ["/sbin/my_init"]
 
-# uid is 9999
-USER app
+# This is the user 'app'
+USER 9999
