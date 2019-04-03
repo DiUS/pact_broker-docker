@@ -37,4 +37,4 @@ services:
       - ./ssl:/etc/nginx/ssl
     ports:
       - "8443:443"
-      - "80:80"
+      - "8080:8080"
