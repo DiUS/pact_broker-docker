@@ -1,3 +1,5 @@
+This image will soon be deprecated, as a smaller and sexier one has now been built in the [Pact Foundation](https://github.com/pact-foundation/pact-broker-docker) organization. The new image can be run without root permissions, and is only 98MB compressed! All environment variable configurations are the same, so you should just be able to switch from `dius/pact-broker` to `pactfoundation/pact-broker` and run with it. Let us know how you go on the #pact-broker channel of our [Pact Foundation Slack](https://slack.pact.io).
+
 Dockerised Pact Broker [![Build Status](https://travis-ci.org/DiUS/pact_broker-docker.svg)](https://travis-ci.org/DiUS/pact_broker-docker)
 ==================
 
