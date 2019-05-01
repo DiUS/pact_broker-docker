@@ -1,3 +1,18 @@
+<a name="2.31.0-1"></a>
+### 2.31.0-1 (2019-05-01)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.31.0	 ([05f2701](/../../commit/05f2701))
+
+
+#### Bug Fixes
+
+* Dockerfile command syntax (#86)	 ([ca05b9d](/../../commit/ca05b9d))
+
+
 <a name="2.29.0-1"></a>
 ### 2.29.0-1 (2019-03-25)
 
