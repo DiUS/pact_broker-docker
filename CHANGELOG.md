@@ -1,3 +1,13 @@
+<a name="2.34.0-1"></a>
+### 2.34.0-1 (2019-08-08)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.34.0	 ([d130ec1](/../../commit/d130ec1))
+
+
 <a name="2.31.0-1"></a>
 ### 2.31.0-1 (2019-05-01)
 
