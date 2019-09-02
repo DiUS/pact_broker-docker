@@ -1,3 +1,18 @@
+<a name="2.37.0-1"></a>
+### 2.37.0-1 (2019-09-02)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.37.0	 ([343b7cb](/../../commit/343b7cb))
+
+
+#### Bug Fixes
+
+* revert to bundler 1.17	 ([b62e6b6](/../../commit/b62e6b6))
+
+
 <a name="2.35.0-1"></a>
 ### 2.35.0-1 (2019-08-09)
 
