@@ -1,3 +1,14 @@
+<a name="2.38.1-1"></a>
+### 2.38.1-1 (2019-09-23)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.38.1	 ([dfe3d6c](/../../commit/dfe3d6c))
+  * update pact_broker gem to version 2.38.0	 ([99bfd71](/../../commit/99bfd71))
+
+
 <a name="2.37.0-1"></a>
 ### 2.37.0-1 (2019-09-02)
 
