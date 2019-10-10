@@ -3,7 +3,7 @@ A smaller and sexier Docker image has now been built in the [Pact Foundation](ht
 Dockerised Pact Broker [![Build Status](https://travis-ci.org/DiUS/pact_broker-docker.svg)](https://travis-ci.org/DiUS/pact_broker-docker)
 ==================
 
-This repository contains a Dockerized [Pact Broker](https://github.com/pact-foundation/pact_broker). You can pull the dius/pact-broker image from [Dockerhub](https://hub.docker.com/r/dius/pact-broker/).
+This repository contains a Dockerized [Pact Broker](https://github.com/pact-foundation/pact_broker). You can pull the `dius/pact-broker` image from [Dockerhub](https://hub.docker.com/r/dius/pact-broker/).
 
 ## In a hurry?
 
