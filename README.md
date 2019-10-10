@@ -1,9 +1,13 @@
-This image will soon be deprecated, as a smaller and sexier one has now been built in the [Pact Foundation](https://github.com/pact-foundation/pact-broker-docker) organization. The new image can be run without root permissions, and is only 98MB compressed! All environment variable configurations are the same, so you should just be able to switch from `dius/pact-broker` to `pactfoundation/pact-broker` and run with it. Let us know how you go on the #pact-broker channel of our [Pact Foundation Slack](https://slack.pact.io).
+A smaller and sexier Docker image has now been built in the [Pact Foundation](https://github.com/pact-foundation/pact-broker-docker) organization. The new image can be run without root permissions, and is only 98MB compressed! All environment variable configurations are the same, so you should just be able to switch from `dius/pact-broker` to `pactfoundation/pact-broker` and run with it - note that the default port has changed from 80 to 9292 though. Let us know how you go on the #pact-broker channel of our [Pact Foundation Slack](https://slack.pact.io).
 
 Dockerised Pact Broker [![Build Status](https://travis-ci.org/DiUS/pact_broker-docker.svg)](https://travis-ci.org/DiUS/pact_broker-docker)
 ==================
 
-This repository deploys [Pact Broker](https://github.com/pact-foundation/pact_broker) using lightweight containers using Docker. You can pull the dius/pact-broker image from [Dockerhub](https://hub.docker.com/r/dius/pact-broker/).
+This repository contains a Dockerized [Pact Broker](https://github.com/pact-foundation/pact_broker). You can pull the dius/pact-broker image from [Dockerhub](https://hub.docker.com/r/dius/pact-broker/).
+
+## In a hurry?
+
+If you want to try out a Pact Broker that can be accessed by all your teams, without having to fill in requisition forms and wait for 3 months, you can get a free trial at <a href="https:/pactflow.io/?utm_source=github&utm_campaign=dius_pact_broker_docker"/>pactflow.io</a>. Built by a group of core Pact maintainers, Pactflow is a fork of the OSS Pact Broker with extra goodies like an improved UI, field level verification results and federated login. It's also fully supported, and that means when something goes wrong, *someone else* gets woken up in the middle of the afternoon to fix it...
 
 ## Prerequisites
 
