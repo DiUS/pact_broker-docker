@@ -1,3 +1,12 @@
+<a name="2.38.1-3"></a>
+### 2.38.1-3 (2019-10-11)
+
+
+#### Bug Fixes
+
+* require PACT_BROKER_ALLOW_PUBLIC_READ to be set to true to enable public read access	 ([fb4f133](/../../commit/fb4f133))
+
+
 <a name="2.38.1-2"></a>
 ### 2.38.1-2 (2019-10-07)
 
