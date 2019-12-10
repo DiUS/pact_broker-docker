@@ -1,3 +1,12 @@
+<a name="2.42.0-2"></a>
+### 2.42.0-2 (2019-12-10)
+
+
+#### Features
+
+* allow PACT_BROKER_FEATURES environment variable to be passed through to application	 ([9b0009d](/../../commit/9b0009d))
+
+
 <a name="2.42.0-1"></a>
 ### 2.42.0-1 (2019-12-05)
 
