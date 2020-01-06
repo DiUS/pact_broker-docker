@@ -20,7 +20,7 @@ COPY container /
 
 COPY --chown=app pact_broker/ $APP_HOME/
 RUN cd $APP_HOME && \
-    gem install --no-document --minimal-deps bundler && \
+    gem install --no-document --minimal-deps bundler -v 2.0.2 && \
     bundle install --deployment --without='development test' && \
     rm -rf vendor/bundle/ruby/2.4.0/cache/ /usr/local/rvm/rubies/ruby-2.4.4/lib/ruby/gems/2.4.0/cache
 
