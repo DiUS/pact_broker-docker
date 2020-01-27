@@ -2,9 +2,10 @@
 
 set -e
 
-cd pact_broker
-bundle update
-cd ..
+source script/docker-functions
+docker_build_bundle_base
+bundle_update_on_docker
+
 unset PACT_BROKER_DATABASE_HOST
 unset PACT_BROKER_DATABASE_USERNAME
 unset PACT_BROKER_DATABASE_PASSWORD
