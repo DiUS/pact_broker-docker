@@ -5,7 +5,7 @@ function docker_build_bundle_base() {
 }
 
 function get_pact_broker_version() {
-  docker run --rm -v ${PWD}/pact_broker/Gemfile.lock:/tmp/Gemfile.lock ruby:2.6.4-alpine ruby -e "puts File.read('/tmp/Gemfile.lock').match(/pact_broker \((.*)\)/)[1]"
+  docker run --rm -v ${PWD}/pact_broker/Gemfile.lock:/tmp/Gemfile.lock dius_pact_broker_bundle_base ruby -e "puts File.read('/tmp/Gemfile.lock').match(/pact_broker \((.*)\)/)[1]"
 }
 
 function bundle_update_on_docker() {
