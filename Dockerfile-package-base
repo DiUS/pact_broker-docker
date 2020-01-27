@@ -1,0 +1,9 @@
+FROM ruby:2.6.4-alpine
+
+# Installation path
+ENV HOME=/app
+WORKDIR $HOME
+
+RUN gem install bundler -v 2.0.2
+COPY Gemfile Gemfile.lock $HOME/
+RUN bundle install --no-cache

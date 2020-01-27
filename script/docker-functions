@@ -13,3 +13,11 @@ function bundle_update_on_docker() {
   docker run --rm -v ${PWD}/tmp:/tmp/shared dius_pact_broker_bundle_base:latest sh -c "bundle update && cp Gemfile.lock /tmp/shared"
   mv tmp/Gemfile.lock pact_broker/
 }
+
+function docker_build_package_base() {
+  docker build . -f Dockerfile-package-base -t dius_pact_broker_package_base
+}
+
+function generate_changelog() {
+  docker run --rm -v ${PWD}:/app dius_pact_broker_package_base bundle exec rake generate_changelog
+}
