@@ -4,10 +4,6 @@ function docker_build_bundle_base() {
   docker build . -f Dockerfile-bundle-base -t dius_pact_broker_bundle_base
 }
 
-function get_pact_broker_version() {
-  docker run --rm -v ${PWD}/pact_broker/Gemfile.lock:/tmp/Gemfile.lock dius_pact_broker_bundle_base ruby -e "puts File.read('/tmp/Gemfile.lock').match(/pact_broker \((.*)\)/)[1]"
-}
-
 function bundle_update_on_docker() {
   rm -rf tmp/Gemfile.lock
   docker run --rm -v ${PWD}/tmp:/tmp/shared dius_pact_broker_bundle_base:latest sh -c "bundle update && cp Gemfile.lock /tmp/shared"
@@ -18,6 +14,6 @@ function docker_build_package_base() {
   docker build . -f Dockerfile-package-base -t dius_pact_broker_package_base
 }
 
-function generate_changelog() {
-  docker run --rm -v ${PWD}:/app dius_pact_broker_package_base bundle exec rake generate_changelog
+function run_on_package_base() {
+  docker run --rm -it dius_pact_broker_package_base sh -c "$@"
 }
