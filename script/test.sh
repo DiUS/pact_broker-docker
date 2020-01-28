@@ -65,8 +65,6 @@ fi
 [ -z "${PACT_BROKER_WEBHOOK_SCHEME_WHITELIST}" ] && PACT_BROKER_WEBHOOK_SCHEME_WHITELIST="http https"
 [ -z "${PACT_BROKER_WEBHOOK_HOST_WHITELIST}" ] && PACT_BROKER_WEBHOOK_HOST_WHITELIST="/.*\\.foo\\.com$/ bar.com 10.2.3.41/24"
 
-script/spec.sh
-
 echo "Will build the pact broker"
 docker build -t=dius/pact_broker .
 
@@ -224,7 +222,7 @@ if [[ ! -z "${PACT_BROKER_BASIC_AUTH_USERNAME}" ]]; then
   fi
 fi
 
-script/publish.sh "http://${test_ip}:${EXTERN_BROKER_PORT}"
+script/test/publish.sh "http://${test_ip}:${EXTERN_BROKER_PORT}"
 
 echo ""
 echo "Checking that badges can be accessed without basic auth"
