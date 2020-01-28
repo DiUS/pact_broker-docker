@@ -12,13 +12,10 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
 
-  broker_app:
+  pact_broker_app:
     image: dius/pact-broker
     links:
       - postgres
-    # If you remove nginx, enable the following
-    #ports:
-    #  - "80:80"
     environment:
       PACT_BROKER_DATABASE_USERNAME: postgres
       PACT_BROKER_DATABASE_PASSWORD: password
@@ -28,13 +25,20 @@ services:
   # Nginx is not necessary, but demonstrates how
   # one might use a reverse proxy in front of the broker,
   # and includes the use of a self-signed TLS certificate
-  nginx:
+  pact_broker:
     image: nginx:alpine
-    links:
-      - broker_app:broker
     volumes:
       - ./ssl/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./ssl:/etc/nginx/ssl
     ports:
       - "8443:443"
       - "80:80"
+
+  can_i_deploy:
+    image: pactfoundation/pact-cli
+    environment:
+      PACT_BROKER_BASE_URL: https://pact_broker:443
+      SSL_CERT_FILE: /tmp/cacert.crt
+    volumes:
+      - ${PWD}/ssl/cacert.crt:/tmp/cacert.crt
+    command: broker can-i-deploy --pacticipant "Example App" --latest
