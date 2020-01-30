@@ -1,3 +1,16 @@
+<a name="2.45.0-1"></a>
+### 2.45.0-1 (2020-01-30)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.45.0	 ([4845a96](/../../commit/4845a96))
+  * update pact_broker gem to version 2.44.0	 ([be497c7](/../../commit/be497c7))
+
+* run release without having any particular ruby installed locally	 ([c52a3b1](/../../commit/c52a3b1))
+
+
 <a name="2.44.0-1"></a>
 ### 2.44.0-1 (2020-01-28)
 
