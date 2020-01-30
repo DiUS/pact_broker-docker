@@ -1,19 +1,30 @@
 #!/usr/bin/env bash
 
+BUNDLE_BASE_IMAGE=dius_pact_broker_bundle_base
+PACKAGE_BASE_IMAGE=dius_pact_broker_package_base
+
 function docker_build_bundle_base() {
-  docker build . -f Dockerfile-bundle-base -t dius_pact_broker_bundle_base
+  docker build . -f Dockerfile-bundle-base -t ${BUNDLE_BASE_IMAGE}
 }
 
 function bundle_update_on_docker() {
+  command="bundle update && cp Gemfile.lock /tmp/shared"
+  if [ -n "$1" ]; then
+    echo "Installing version ${1} of the pact_broker gem and updating gems"
+    command="gem install pact_broker -v $1 && ${command}"
+  else
+    echo "Updating gems"
+  fi
   rm -rf tmp/Gemfile.lock
-  docker run --rm -v ${PWD}/tmp:/tmp/shared dius_pact_broker_bundle_base:latest sh -c "bundle update && cp Gemfile.lock /tmp/shared"
+  docker run --rm -v ${PWD}/tmp:/tmp/shared ${BUNDLE_BASE_IMAGE} sh -c "$command"
   mv tmp/Gemfile.lock pact_broker/
+
 }
 
 function docker_build_package_base() {
-  docker build . -f Dockerfile-package-base -t dius_pact_broker_package_base
+  docker build . -f Dockerfile-package-base -t ${PACKAGE_BASE_IMAGE}
 }
 
 function run_on_package_base() {
-  docker run --rm -it dius_pact_broker_package_base sh -c "$@"
+  docker run --rm -it ${PACKAGE_BASE_IMAGE} sh -c "$@"
 }
