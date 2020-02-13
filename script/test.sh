@@ -240,3 +240,5 @@ if [[ "${response_code}" -ne '200' ]]; then
 fi
 
 echo "SUCCESS: All tests passed!"
+
+docker rm -f ${PACT_CONT_NAME}
