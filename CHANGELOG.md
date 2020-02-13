@@ -1,3 +1,13 @@
+<a name="2.49.0-1"></a>
+### 2.49.0-1 (2020-02-13)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.49.0	 ([fc2d2fc](/../../commit/fc2d2fc))
+
+
 <a name="2.48.0-1"></a>
 ### 2.48.0-1 (2020-02-08)
 
