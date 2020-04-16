@@ -1,3 +1,13 @@
+<a name="2.52.2-1"></a>
+### 2.52.2-1 (2020-04-16)
+
+
+#### Features
+
+* **gems**
+  * update pact_broker gem to version 2.52.2	 ([d00a009](/../../commit/d00a009))
+
+
 <a name="2.51.0-1"></a>
 ### 2.51.0-1 (2020-03-11)
 
