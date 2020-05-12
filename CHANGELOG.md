@@ -1,3 +1,12 @@
+<a name="2.52.2.2"></a>
+### 2.52.2.2 (2020-05-12)
+
+
+#### Features
+
+* change tagging format from M.m.p-RELEASE to M.m.p.RELEASE to support dependabot	 ([2ef434a](/../../commit/2ef434a))
+
+
 <a name="2.52.2-1"></a>
 ### 2.52.2-1 (2020-04-16)
 
