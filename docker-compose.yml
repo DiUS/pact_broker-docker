@@ -5,8 +5,6 @@ services:
     image: postgres
     healthcheck:
       test: psql postgres --command "select 1" -U postgres
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -14,6 +12,8 @@ services:
 
   pact-broker:
     image: dius/pact-broker
+    # build:
+    #   context: .
     depends_on:
       - postgres
     environment:
@@ -46,7 +46,7 @@ services:
       - pact-broker-with-ngnix
     environment:
       PACT_BROKER_BASE_URL: https://pact-broker-with-ngnix:443
-      SSL_CERT_FILE: /tmp/cacert.crt
+      SSL_CERT_FILE: /tmp/nginx-selfsigned.crt
     volumes:
-      - ${PWD}/ssl/nginx-selfsigned.crt:/tmp/cacert.crt
+      - ${PWD}/ssl/nginx-selfsigned.crt:/tmp/nginx-selfsigned.crt
     command: broker can-i-deploy --pacticipant "Example App" --latest
