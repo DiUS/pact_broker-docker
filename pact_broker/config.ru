@@ -36,14 +36,14 @@ allow_public_read_access = ENV.fetch('PACT_BROKER_ALLOW_PUBLIC_READ', '') == 'tr
 allow_public_access_to_heartbeat = ENV.fetch('PACT_BROKER_PUBLIC_HEARTBEAT', '') == 'true'
 use_basic_auth = basic_auth_username != '' && basic_auth_password != ''
 
+
 if use_basic_auth
+  puts "INFO: Public read access is enabled" if allow_public_read_access
+  policy = PactBrokerResourceAccessPolicy.build(allow_public_read_access, allow_public_access_to_heartbeat)
   use BasicAuth,
-        basic_auth_username,
-        basic_auth_password,
-        basic_auth_read_only_username,
-        basic_auth_read_only_password,
-        allow_public_read_access,
-        allow_public_access_to_heartbeat
+        [basic_auth_username, basic_auth_password],
+        [basic_auth_read_only_username, basic_auth_read_only_password],
+        policy
 end
 
 run app
