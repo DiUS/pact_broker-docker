@@ -8,11 +8,14 @@ module PactBroker
     end
 
     def pact_broker_environment_variables
-      @env.each_with_object({}) do | (key, value), hash |
-        if key.start_with?("PACT_BROKER_")
-          hash[key] = key =~ /password/i ? "*****" : value
-        end
+      pact_broker_environment_variable_names.sort.each_with_object({}) do | name, hash |
+        hash[name] = name =~ /password/i ? "*****" : @env[name]
       end
+    end
+
+    def pact_broker_environment_variable_names
+      remapped_env_var_names = @env.keys.select { |k| k.start_with?('PACT_BROKER_') && k.end_with?('_ENVIRONMENT_VARIABLE_NAME') }
+      @env.keys.select{ |k| k.start_with?('PACT_BROKER_') } + remapped_env_var_names.collect{ |name| @env[name] }.compact
     end
 
     def webhook_host_whitelist
@@ -25,6 +28,19 @@ module PactBroker
 
     def webhook_http_method_whitelist
       space_delimited_string_list_or_default(:webhook_http_method_whitelist)
+    end
+
+    def database_configuration
+      if database_url
+        database_configuration_from_url
+      else
+        database_configuration_from_parts
+      end.merge(
+        encoding: 'utf8',
+        sslmode: env_or_nil(:database_sslmode),
+        sql_log_level: (env_or_nil(:sql_log_level) || 'debug').downcase.to_sym,
+        log_warn_duration: (env_or_nil(:sql_log_warn_duration) || '5').to_f
+      ).compact
     end
 
     def base_equality_only_on_content_that_affects_verification_results
@@ -59,6 +75,10 @@ module PactBroker
       (env(name) || "").size > 0
     end
 
+    def env_or_nil name
+      env_populated?(name) ? env(name) : nil
+    end
+
     def default property_name
       @default_configuration.send(property_name)
     end
@@ -72,7 +92,6 @@ module PactBroker
     end
 
     class SpaceDelimitedStringList < Array
-
       def initialize list
         super(list)
       end
@@ -97,6 +116,43 @@ module PactBroker
           end
         end.join(' ')
       end
+    end
+
+    private
+
+    def database_url
+      @database_url ||= @env[env_or_nil(:database_url_environment_variable_name) || 'PACT_BROKER_DATABASE_URL']
+    end
+
+    def database_configuration_from_parts
+      database_adapter = env_or_nil(:database_adapter) || 'postgres'
+
+      config = {
+        adapter: database_adapter,
+        user: env(:database_username),
+        password: env(:database_password),
+        host: env(:database_host),
+        database: env(:database_name),
+      }
+
+      if env(:database_port) =~ /^\d+$/
+        config[:port] = env(:database_port).to_i
+      end
+
+      config
+    end
+
+    def database_configuration_from_url
+      uri = URI(database_url)
+
+      {
+        adapter: uri.scheme,
+        user: uri.user,
+        password: uri.password,
+        host: uri.host,
+        database: uri.path.sub(/^\//, ''),
+        port: uri.port&.to_i,
+      }.compact
     end
   end
 end
