@@ -1,9 +1,11 @@
-A smaller and sexier Docker image has now been built in the [Pact Foundation](https://github.com/pact-foundation/pact-broker-docker) organization. The new image can be run without root permissions, and is only 98MB compressed! All environment variable configurations are the same, so you should just be able to switch from `dius/pact-broker` to `pactfoundation/pact-broker` and run with it - note that the default port has changed from 80 to 9292 though. Let us know how you go on the #pact-broker channel of our [Pact Foundation Slack](https://slack.pact.io).
 
-Dockerised Pact Broker [![Build Status](https://travis-ci.org/DiUS/pact_broker-docker.svg)](https://travis-ci.org/DiUS/pact_broker-docker)
-==================
+# Dockerised Pact Broker
+
+[![Build Status](https://travis-ci.org/DiUS/pact_broker-docker.svg)](https://travis-ci.org/DiUS/pact_broker-docker)
 
 This repository contains a Dockerized [Pact Broker](https://github.com/pact-foundation/pact_broker). You can pull the `dius/pact-broker` image from [Dockerhub](https://hub.docker.com/r/dius/pact-broker/).
+
+> A smaller and sexier Docker image has now been built in the [Pact Foundation](https://github.com/pact-foundation/pact-broker-docker) organization. The new image can be run without root permissions, and is only 98MB compressed! All environment variable configurations are the same, so you should just be able to switch from `dius/pact-broker` to `pactfoundation/pact-broker` and run with it - note that the default port has changed from 80 to 9292 though.
 
 > Note: On 12 May 2018, the format of the docker tag changed from `M.m.p-RELEASE` to `M.m.p.RELEASE` (where `M.m.p` is the semantic version of the underlying Pact Broker package) so that Dependabot can recognise when the version has been incremented.
 
@@ -123,3 +125,4 @@ See the [Troubleshooting][troubleshooting] page on the wiki.
 [docker-compose]: https://github.com/DiUS/pact_broker-docker/blob/master/docker-compose.yml
 [pact-broker-docs]: https://docs.pact.io/pact_broker/
 [reverse-proxy]: https://docs.pact.io/pact_broker/configuration#running-the-broker-behind-a-reverse-proxy
+
