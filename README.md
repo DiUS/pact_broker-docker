@@ -87,7 +87,7 @@ Set the environment variable `PACT_BROKER_LOG_LEVEL` to one of `DEBUG`, `INFO`, 
 
 ## General Pact Broker configuration and usage
 
-Documentation for the Pact Broker application itself can be found in the Pact Broker [wiki][pact-broker-wiki].
+Documentation for the Pact Broker application itself can be found in the Pact Broker [docs][pact-broker-docs].
 
 ## Running with Docker Compose
 
@@ -116,10 +116,10 @@ See [pact-broker-openshift](https://github.com/jaimeniswonger/pact-broker-opensh
 
 See the [Troubleshooting][troubleshooting] page on the wiki.
 
-[badges]: https://github.com/pact-foundation/pact_broker/wiki/Provider-verification-badges
-[troubleshooting]: https://github.com/DiUS/pact_broker-docker/wiki/Troubleshooting
+[badges]: https://docs.pact.io/pact_broker/advanced_topics/provider_verification_badges
+[troubleshooting]: https://github.com/pact-foundation/pact-broker-docker/wiki/Troubleshooting
 [postgres]: https://github.com/DiUS/pact_broker-docker/blob/master/POSTGRESQL.md
 [test-script]: https://github.com/DiUS/pact_broker-docker/blob/master/script/test.sh
 [docker-compose]: https://github.com/DiUS/pact_broker-docker/blob/master/docker-compose.yml
-[pact-broker-wiki]: https://github.com/pact-foundation/pact_broker/wiki
-[reverse-proxy]: https://github.com/pact-foundation/pact_broker/wiki/Configuration#running-the-broker-behind-a-reverse-proxy
+[pact-broker-docs]: https://docs.pact.io/pact_broker/
+[reverse-proxy]: https://docs.pact.io/pact_broker/configuration#running-the-broker-behind-a-reverse-proxy
