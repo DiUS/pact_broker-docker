@@ -25,21 +25,29 @@ If you want to try out a Pact Broker that can be accessed by all your teams, wit
 
 For a postgres or mysql database:
 
-    * PACT_BROKER_DATABASE_ADAPTER (optional, defaults to 'postgres', see note below.)
-    * PACT_BROKER_DATABASE_USERNAME
-    * PACT_BROKER_DATABASE_PASSWORD
-    * PACT_BROKER_DATABASE_HOST
-    * PACT_BROKER_DATABASE_PORT (optional, defaults to the default port for the specified adapter)
-    * PACT_BROKER_DATABASE_NAME
+You can either set the `PACT_BROKER_DATABASE_URL` in the format `driver://username:password@host:port/database` (eg. `postgres://user1:pass1@myhost/mydb`) or, you can set the credentials individually using the following environment variables:
+
+    * `PACT_BROKER_DATABASE_ADAPTER` (optional, defaults to 'postgres', see note below.)
+    * `PACT_BROKER_DATABASE_USERNAME`
+    * `PACT_BROKER_DATABASE_PASSWORD`
+    * `PACT_BROKER_DATABASE_HOST`
+    * `PACT_BROKER_DATABASE_NAME`
+    * `PACT_BROKER_DATABASE_PORT` (optional, defaults to the default port for the specified adapter)
 
 Adapter can be 'postgres' (recommended) or 'mysql2' (please note that future JSON search features may not be supported on mysql).
 
 For an sqlite database (only recommended for investigation/spikes, as it will be disposed of with the container unless you mount it from an external file system):
 
-  * PACT_BROKER_DATABASE_ADAPTER (set to 'sqlite')
-  * PACT_BROKER_DATABASE_NAME (arbitrary name eg. pact_broker.sqlite)
+  * `PACT_BROKER_DATABASE_ADAPTER` (set to 'sqlite')
+  * `PACT_BROKER_DATABASE_NAME` (arbitrary name eg. pact_broker.sqlite)
 
-3. Test the pact broker environment by executing [script/test.sh][test-script]
+You can additionally set:
+
+    * `PACT_BROKER_DATABASE_SSLMODE` - optional, possible values: 'disable', 'allow', 'prefer', 'require', 'verify-ca', or 'verify-full' to choose how to treat SSL (only respected if using the postgres database adapter. See https://www.postgresql.org/docs/9.1/libpq-ssl.html for more information.)
+    * `PACT_BROKER_SQL_LOG_LEVEL` - optional, defaults to debug. The level at which to log SQL statements.
+    * `PACT_BROKER_SQL_LOG_WARN_DURATION` - optional, defaults to 5 seconds. Log the SQL for queries that take longer than this number of seconds.
+    * `PACT_BROKER_DATABASE_MAX_CONNECTIONS` - optional, defaults to 4. The maximum size of the connection pool.
+    * `PACT_BROKER_DATABASE_POOL_TIMEOUT` - optional, 5 seconds by default. The number of seconds to wait if a connection cannot be acquired before raising an error.
 
 ## Notes
 
