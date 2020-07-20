@@ -7,7 +7,7 @@ services:
 before_install:
   - sudo service docker restart; sleep 10; docker --version
   - yes | gem update --system --force
-  - gem install bundler -v 2.0.2
+  - gem install bundler -v 2.1.4
 
 # add jq in packages once it becomes pre-allowed
 #  https://github.com/travis-ci/apt-package-whitelist/issues/1394
