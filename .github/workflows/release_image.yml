@@ -1,0 +1,51 @@
+name: Release Docker image
+
+on:
+  repository_dispatch:
+    types:
+      - release-triggered
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.4
+
+      - run: bundle install
+
+      - name: Configure git
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global push.default current
+
+      - name: Login to Docker Hub
+        run: script/workflow/docker-login.sh
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t dius/pact-broker:latest .
+
+      - name: Calculate next tag
+        run: echo "::set-env name=TAG::$(script/release/next-docker-tag.sh)"
+
+      - name: Set major tag
+        run: echo "::set-env name=MAJOR_TAG::$(echo $TAG | cut -d'.' -f1)"
+
+      - name: Prepare release
+        run: script/workflow/prepare-release.sh
+
+      - name: Push image to Docker Hub
+        run: script/workflow/push-image-to-docker-hub.sh
+
+      - name: Git push to master
+        run: git push origin master
