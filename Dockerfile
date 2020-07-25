@@ -14,16 +14,20 @@ RUN apt-get update && \
 RUN bash -lc 'rvm --default use ruby-2.4.5'
 
 ENV APP_HOME=/home/app/pact_broker/
+WORKDIR $APP_HOME
+
 RUN rm -f /etc/service/nginx/down /etc/nginx/sites-enabled/default
 COPY container /
 #USER app
 
 COPY --chown=app pact_broker/Gemfile $APP_HOME/Gemfile
 COPY --chown=app pact_broker/Gemfile.lock $APP_HOME/Gemfile.lock
+RUN cat Gemfile.lock | grep -A1 "BUNDLED WITH" | tail -n1 | awk '{print $1}' > BUNDLER_VERSION
 
 RUN cd $APP_HOME && \
-    gem install --no-document --minimal-deps bundler -v 2.1.4 && \
-    bundle install --deployment --without='development test' && \
+    gem install --no-document --minimal-deps bundler -v $(cat BUNDLER_VERSION) && \
+    bundle config set deployment 'true' && \
+    bundle install --without='development test' && \
     rm -rf vendor/bundle/ruby/2.4.0/cache/ /usr/local/rvm/rubies/ruby-2.4.4/lib/ruby/gems/2.4.0/cache
 
 COPY --chown=app pact_broker/ $APP_HOME/
