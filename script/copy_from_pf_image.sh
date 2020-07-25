@@ -16,3 +16,8 @@ cp ../pact-broker-docker/.github/workflows/release_image.yml .github/workflows/r
 cp ../pact-broker-docker/.github/workflows/update_gems.yml .github/workflows/update_gems.yml
 cp ../pact-broker-docker/script/trigger-release.sh script/trigger-release.sh
 cp ../pact-broker-docker/script/dispatch-gem-released.sh script/dispatch-gem-released.sh
+cp ../pact-broker-docker/docker-compose-tests.yml docker-compose-tests.yml
+cp ../pact-broker-docker/docker-compose-test-different-env-var-names.yml docker-compose-test-different-env-var-names.yml
+cp ../pact-broker-docker/script/test.sh script/test.sh
+cp ../pact-broker-docker/script/docker/docker-compose-entrypoint.sh script/docker/docker-compose-entrypoint.sh
+cp -R ../pact-broker-docker/test test
