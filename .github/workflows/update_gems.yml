@@ -44,7 +44,7 @@ jobs:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t pactfoundation/pact-broker:latest .
+        run: docker build -t dius/pact-broker:latest .
 
       - name: Integration tests
         run: script/test.sh
