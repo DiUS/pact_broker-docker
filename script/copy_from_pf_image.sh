@@ -8,3 +8,11 @@ cp ../pact-broker-docker/pact_broker/basic_auth.rb pact_broker/basic_auth.rb
 cp ../pact-broker-docker/pact_broker/resource_access_rules.rb pact_broker/resource_access_rules.rb
 cp ../pact-broker-docker/pact_broker/logger.rb pact_broker/logger.rb
 cp ../pact-broker-docker/pact_broker/docker_configuration.rb pact_broker/docker_configuration.rb
+rm -rf script/release-workflow/
+cp -R ../pact-broker-docker/script/release-workflow script/release-workflow
+rm -rf script/update-gems-workflow
+cp -R ../pact-broker-docker/script/update-gems-workflow/ script/update-gems-workflow
+cp ../pact-broker-docker/.github/workflows/release_image.yml .github/workflows/release_image.yml
+cp ../pact-broker-docker/.github/workflows/update_gems.yml .github/workflows/update_gems.yml
+cp ../pact-broker-docker/script/trigger-release.sh script/trigger-release.sh
+cp ../pact-broker-docker/script/dispatch-gem-released.sh script/dispatch-gem-released.sh
