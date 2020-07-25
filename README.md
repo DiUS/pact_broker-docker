@@ -34,9 +34,9 @@ You can either set the `PACT_BROKER_DATABASE_URL` in the format `driver://userna
     * `PACT_BROKER_DATABASE_NAME`
     * `PACT_BROKER_DATABASE_PORT` (optional, defaults to the default port for the specified adapter)
 
-Adapter can be 'postgres' (recommended) or 'mysql2' (please note that future JSON search features may not be supported on mysql).
+Adapter can be 'postgres' (recommended) or 'mysql2' (please note that future JSON search features may not be supported on mysql). SQLite will work for spikes, but it is NOT supported as a production database.
 
-For an sqlite database (only recommended for investigation/spikes, as it will be disposed of with the container unless you mount it from an external file system):
+For an SQLite database (only recommended for investigation/spikes, as it will be disposed of with the container unless you mount it from an external file system):
 
   * `PACT_BROKER_DATABASE_ADAPTER` (set to 'sqlite')
   * `PACT_BROKER_DATABASE_NAME` (arbitrary name eg. pact_broker.sqlite)
