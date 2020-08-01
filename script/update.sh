@@ -7,8 +7,8 @@ if nc -zv localhost 9292 >/dev/null 2>&1 ; then
   exit 1
 fi
 
-source script/docker-functions
-source script/functions
+. script/docker-functions
+. script/functions
 
 git pull origin master
 
