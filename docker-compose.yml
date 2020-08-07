@@ -46,7 +46,7 @@ services:
       - pact-broker-with-ngnix
     environment:
       PACT_BROKER_BASE_URL: https://pact-broker-with-ngnix:443
-      SSL_CERT_FILE: /tmp/nginx-selfsigned.crt
+      SSL_CERT_FILE: /tmp/cacert.pem
     volumes:
-      - ${PWD}/ssl/nginx-selfsigned.crt:/tmp/nginx-selfsigned.crt
+      - ${PWD}/ssl/cacert.pem:/tmp/cacert.pem
     command: broker can-i-deploy --pacticipant "Example App" --latest
