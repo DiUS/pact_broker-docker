@@ -1,3 +1,13 @@
+<a name="2.60.0.0"></a>
+### 2.60.0.0 (2020-09-08)
+
+
+#### Features
+
+* **deps**
+  * update to concurrent-ruby (1.1.7), pact_broker (2.60.0), rack-protection (2.1.0), sequel (5.36.0), sinatra (2.1.0), rack (~> 2.2), rack-protection (= 2.1.0)	 ([12d32be](/../../commit/12d32be))
+
+
 <a name="2.59.2.0"></a>
 ### 2.59.2.0 (2020-08-07)
 
