@@ -46,4 +46,6 @@ if use_basic_auth
         policy
 end
 
-run app
+map "/pact" do
+  run app
+end
