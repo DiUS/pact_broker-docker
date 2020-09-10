@@ -1,3 +1,15 @@
+<a name="2.60.1.0"></a>
+### 2.60.1.0 (2020-09-10)
+
+
+#### Features
+
+* **deps**
+  * update to pact_broker (2.60.1)	 ([1d96514](/../../commit/1d96514))
+
+* increase the client max body size to 10MB	 ([fdb7c98](/../../commit/fdb7c98))
+
+
 <a name="2.60.0.0"></a>
 ### 2.60.0.0 (2020-09-08)
 
