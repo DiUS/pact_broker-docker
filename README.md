@@ -46,7 +46,7 @@ Adapter can be 'postgres' (recommended) or 'mysql2' (please note that future JSO
 For an SQLite database (only recommended for investigation/spikes, as it will be disposed of with the container unless you mount it from an external file system):
 
   * `PACT_BROKER_DATABASE_ADAPTER` (set to 'sqlite')
-  * `PACT_BROKER_DATABASE_NAME` (arbitrary name eg. pact_broker.sqlite)
+  * `PACT_BROKER_DATABASE_NAME` (arbitrary name eg. /tmp/pact_broker.sqlite)
 
 You can additionally set:
 
