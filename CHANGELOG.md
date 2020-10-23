@@ -1,3 +1,13 @@
+<a name="2.68.0.0"></a>
+### 2.68.0.0 (2020-10-23)
+
+
+#### Features
+
+* **deps**
+  * update to pact_broker (2.68.0), semantic_logger (4.7.3)	 ([90ae6ab](/../../commit/90ae6ab))
+
+
 <a name="2.67.0.0"></a>
 ### 2.67.0.0 (2020-10-15)
 
