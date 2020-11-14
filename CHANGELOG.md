@@ -1,3 +1,13 @@
+<a name="2.68.1.1"></a>
+### 2.68.1.1 (2020-11-14)
+
+
+#### Features
+
+* set ngnix client_max_body_size to 5M	 ([d2861a8](/../../commit/d2861a8))
+* increase ngnix client_max_body_size to 20M	 ([8e70bfa](/../../commit/8e70bfa))
+
+
 <a name="2.68.1.0"></a>
 ### 2.68.1.0 (2020-10-25)
 
