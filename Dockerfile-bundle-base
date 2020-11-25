@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby24:1.0.5
+FROM phusion/passenger-ruby27:1.0.12
 
 # Installation path
 ENV HOME=/pact_broker
