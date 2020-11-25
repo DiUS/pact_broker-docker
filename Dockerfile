@@ -2,7 +2,7 @@
 # |==> phusion/baseimage -- https://github.com/phusion/baseimage-docker
 #      |==> phusion/passenger-docker -- https://github.com/phusion/passenger-docker
 #           |==> HERE
-FROM phusion/passenger-ruby24:1.0.5
+FROM phusion/passenger-ruby27:1.0.12
 
 # Update OS as per https://github.com/phusion/passenger-docker#upgrading-the-operating-system-inside-the-container
 RUN apt-get update && \
@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN bash -lc 'rvm --default use ruby-2.4.5'
+RUN bash -lc 'rvm --default use ruby-2.7.2'
 
 ENV APP_HOME=/home/app/pact_broker/
 WORKDIR $APP_HOME
