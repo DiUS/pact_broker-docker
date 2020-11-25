@@ -140,4 +140,3 @@ See the [Troubleshooting][troubleshooting] page on the wiki.
 [docker-compose]: https://github.com/DiUS/pact_broker-docker/blob/master/docker-compose.yml
 [pact-broker-docs]: https://docs.pact.io/pact_broker/
 [reverse-proxy]: https://docs.pact.io/pact_broker/configuration#running-the-broker-behind-a-reverse-proxy
-
