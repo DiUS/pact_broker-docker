@@ -28,9 +28,18 @@ If you want to try out a Pact Broker that can be accessed by all your teams, wit
 ## Getting Started
 
 1. [Install Docker](https://docs.docker.com/engine/installation/)
-2. Prepare your environment if you are not running postgresql in a docker container. Setup the pact broker connection to the database through the use of the following environment variables. If you want to use a disposable postgres docker container just do `export DISPOSABLE_PSQL=true` before running the [script/test.sh][test-script].
 
-For a postgres or mysql database:
+### Create the database
+
+On an instance of Postgres version 10 or later, connect as a user with administrator privileges and run:
+
+```
+CREATE DATABASE pact_broker;
+CREATE ROLE pact_broker WITH LOGIN PASSWORD 'CHANGE_ME';
+GRANT ALL PRIVILEGES ON DATABASE pact_broker TO pact_broker;
+```
+
+### Configure the connection details
 
 You can either set the `PACT_BROKER_DATABASE_URL` in the format `driver://username:password@host:port/database` (eg. `postgres://user1:pass1@myhost/mydb`) or, you can set the credentials individually using the following environment variables:
 
@@ -41,7 +50,7 @@ You can either set the `PACT_BROKER_DATABASE_URL` in the format `driver://userna
     * `PACT_BROKER_DATABASE_NAME`
     * `PACT_BROKER_DATABASE_PORT` (optional, defaults to the default port for the specified adapter)
 
-Adapter can be 'postgres' (recommended) or 'mysql2' (please note that future JSON search features may not be supported on mysql). SQLite will work for spikes, but it is NOT supported as a production database.
+Adapter can be 'postgres' (recommended) or 'sqlite'. SQLite will work for spikes, but it is NOT supported as a production database.
 
 For an SQLite database (only recommended for investigation/spikes, as it will be disposed of with the container unless you mount it from an external file system):
 
