@@ -1,3 +1,16 @@
+<a name="2.78.0.0"></a>
+### 2.78.0.0 (2021-02-17)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.78.0	 ([3143d5b](/../../commit/3143d5b))
+  * update pact_broker gem to version 2.77.0	 ([63df2dc](/../../commit/63df2dc))
+
+* run trivy security scanner during release (#106)	 ([95cae86](/../../commit/95cae86))
+
+
 <a name="2.76.2.0"></a>
 ### 2.76.2.0 (2021-01-29)
 
