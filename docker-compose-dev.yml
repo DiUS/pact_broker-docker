@@ -21,5 +21,6 @@ services:
       PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: postgres
       PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_DATABASE_CONNECT_MAX_RETRIES: "10"
     ports:
      - "80:80"
