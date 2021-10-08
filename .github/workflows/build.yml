@@ -1,0 +1,23 @@
+name: Build Docker image
+
+on: [push]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.4
+
+      - name: Build image
+        run: script/build-workflow/run.sh
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          CUSTOM_TAG: ${{ github.event.client_payload.tag }}
