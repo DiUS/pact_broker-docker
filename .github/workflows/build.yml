@@ -3,7 +3,7 @@ name: Build Docker image
 on: [push]
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
