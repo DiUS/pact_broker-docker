@@ -5,11 +5,12 @@
 FROM phusion/passenger-ruby27:1.0.12
 
 # Update OS as per https://github.com/phusion/passenger-docker#upgrading-the-operating-system-inside-the-container
-RUN apt-get update && \
-    apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get -qy autoremove && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Broken update https://github.com/DiUS/pact_broker-docker/runs/3799650621?check_suite_focus=true#step:9:87
+# RUN apt-get update && \
+#    apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
+#    apt-get -qy autoremove && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN bash -lc 'rvm --default use ruby-2.7.2'
 

@@ -22,6 +22,7 @@ services:
       PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: postgres
       PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_DATABASE_CONNECT_MAX_RETRIES: "10"
     # If you remove nginx, enable the following
     # ports:
     #  - "80:80"
