@@ -5,7 +5,7 @@ set -euo >/dev/null
 script_dir=$(cd "$(dirname $0)" && pwd)
 
 if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
-  ${script_dir}/docker-login.sh
+  echo ${DOCKER_HUB_TOKEN} | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
 fi
 
 ${script_dir}/docker-build.sh
