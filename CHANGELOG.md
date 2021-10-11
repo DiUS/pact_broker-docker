@@ -1,3 +1,15 @@
+<a name="2.88.0.0"></a>
+### 2.88.0.0 (2021-10-11)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.88.0	 ([7fab03c](/../../commit/7fab03c))
+
+* add support for configuration with YAML file (#109)	 ([59d23d9](/../../commit/59d23d9))
+
+
 <a name="2.86.0.1"></a>
 ### 2.86.0.1 (2021-09-28)
 
