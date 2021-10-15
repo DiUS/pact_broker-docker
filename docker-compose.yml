@@ -41,13 +41,14 @@ services:
       - "8443:443"
       - "80:80"
 
-  can-i-deploy:
-    image: pactfoundation/pact-cli
+  list-environments:
+    image: pactfoundation/pact-cli:0.50.0.14
     depends_on:
       - pact-broker-with-ngnix
     environment:
       PACT_BROKER_BASE_URL: https://pact-broker-with-ngnix:443
-      SSL_CERT_FILE: /tmp/self-signed-cert.pem
+      # SSL_CERT_FILE: /tmp/self-signed-cert.pem
+      PACT_DISABLE_SSL_VERIFICATION: "true"
     volumes:
       - ${PWD}/ssl/self-signed-cert.pem:/tmp/self-signed-cert.pem
-    command: broker can-i-deploy --pacticipant "Example App" --latest
+    command: broker list-environments
