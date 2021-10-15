@@ -1,3 +1,15 @@
+<a name="2.89.0.0"></a>
+### 2.89.0.0 (2021-10-15)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.89.0	 ([dca14f2](/../../commit/dca14f2))
+
+* update passenger allowed environment variables	 ([cc4273c](/../../commit/cc4273c))
+
+
 <a name="2.88.0.0"></a>
 ### 2.88.0.0 (2021-10-11)
 
