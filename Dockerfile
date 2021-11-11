@@ -12,7 +12,7 @@ FROM phusion/passenger-ruby27:2.0.1
 #    apt-get clean && \
 #    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN bash -lc 'rvm --default use ruby-2.7.2'
+RUN bash -lc 'rvm --default use ruby-2.7.4'
 
 ENV APP_HOME=/home/app/pact_broker/
 WORKDIR $APP_HOME
