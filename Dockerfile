@@ -2,7 +2,7 @@
 # |==> phusion/baseimage -- https://github.com/phusion/baseimage-docker
 #      |==> phusion/passenger-docker -- https://github.com/phusion/passenger-docker
 #           |==> HERE
-FROM phusion/passenger-ruby27:2.0.1
+FROM phusion/passenger-ruby27:1.0.12
 
 # Update OS as per https://github.com/phusion/passenger-docker#upgrading-the-operating-system-inside-the-container
 # Broken update https://github.com/DiUS/pact_broker-docker/runs/3799650621?check_suite_focus=true#step:9:87
