@@ -1,3 +1,13 @@
+<a name="2.89.1.1"></a>
+### 2.89.1.1 (2021-11-11)
+
+
+#### Bug Fixes
+
+* phusion passenger ruby image, ruby 2.7.4 (#113)	 ([db7fe6e](/../../commit/db7fe6e))
+* upgrade to latest phusion passenger ruby image (#111)	 ([a892b8b](/../../commit/a892b8b))
+
+
 <a name="2.89.1.0"></a>
 ### 2.89.1.0 (2021-10-27)
 
