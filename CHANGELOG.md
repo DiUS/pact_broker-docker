@@ -1,3 +1,13 @@
+<a name="2.93.1.0"></a>
+### 2.93.1.0 (2021-12-21)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.93.1	 ([21cacbe](/../../commit/21cacbe))
+
+
 <a name="2.93.0.0"></a>
 ### 2.93.0.0 (2021-12-07)
 
