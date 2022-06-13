@@ -1,3 +1,13 @@
+<a name="2.101.0.0"></a>
+### 2.101.0.0 (2022-06-13)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.101.0	 ([fc75d10](/../../commit/fc75d10))
+
+
 <a name="2.100.0.1"></a>
 ### 2.100.0.1 (2022-05-31)
 
