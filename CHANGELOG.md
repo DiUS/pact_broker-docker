@@ -1,3 +1,14 @@
+<a name="2.102.2.0"></a>
+### 2.102.2.0 (2022-07-14)
+
+
+#### Features
+
+* **deps**
+  * update pact_broker gem to version 2.102.2	 ([d46c9fe](/../../commit/d46c9fe))
+  * update pact_broker gem to version 2.102.1	 ([a9808eb](/../../commit/a9808eb))
+
+
 <a name="2.101.0.0"></a>
 ### 2.101.0.0 (2022-06-13)
 
